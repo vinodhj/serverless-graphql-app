@@ -6,11 +6,16 @@ export class ServerlessGraphqlAppStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+   //  Create the Lambda function
+    const graphqlLambda = new cdk.aws_lambda.Function(this, 'GraphQLHandler', {
+      runtime: cdk.aws_lambda.Runtime.NODEJS_14_X,
+      handler: 'index.handler',
+      code: cdk.aws_lambda.Code.fromAsset('graphql'),
+    });
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'ServerlessGraphqlAppQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+     // Create the API Gateway
+    new cdk.aws_apigateway.LambdaRestApi(this, 'GraphQLEndpoint', {
+      handler: graphqlLambda,
+    });
   }
 }
