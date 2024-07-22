@@ -5,7 +5,10 @@
     "serverless-graphql-app": "bin/serverless-graphql-app.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "cdk synth",
+    "bootstrap": "cdk bootstrap",
+    "deploy": "cdk deploy",
+    "dev": "cd local && ./run.sh",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk"
@@ -23,7 +26,6 @@
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.204.0",
     "@aws-cdk/aws-lambda": "^1.204.0",
-    "@graphql-yoga/node": "^3.9.1",
     "aws-cdk-lib": "2.133.0",
     "constructs": "^10.0.0",
     "graphql": "^16.9.0",
